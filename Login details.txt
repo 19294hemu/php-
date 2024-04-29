@@ -1,0 +1,19 @@
+Admin login
+---------------
+username :admin
+password: admin
+
+
+user login
+-----------
+username:kumar
+password:kumar
+
+check in table user
+
+skilledperson
+--------------
+username:ayyappa
+password:ayyappa
+
+check in table user
