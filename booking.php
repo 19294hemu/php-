@@ -1,5 +1,5 @@
 
-<?php include 'includes/connection.php';?>
+<?php include '../includes/connection.php';?>
 <!doctype html>
 <html lang="zxx">
 <head>
@@ -8,15 +8,15 @@
 
 
 
-<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
 
-<link href="./font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-<link href="./css/matrialize.css" rel="stylesheet">
+<link href="../css/matrialize.css" rel="stylesheet">
 
-<link href="./owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+<link href="../owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="./css/style.css">
+<link rel="../stylesheet" href="./css/style.css">
 </head>
 <?php
 session_start(); ?>
@@ -53,14 +53,14 @@ employment@gmail.com</li>
 <div class="col">
 <div class="header_content d-flex flex-row align-items-center justify-content-start">
 <div class="logo_container">
-<a href="index.php">
-<img src="./imags/logo.png" class="logo-text" alt="" height="50px">
+<a href="../index.php">
+<img src="../imags/logo.png" class="logo-text" alt="" height="50px">
 </a>
 </div>
 <nav class="main_nav_contaner ml-auto">
 <ul class="main_nav">
 <li><a href="#">Welcome <?php echo $_SESSION['fullname'] ?></a></li>
-<li><a href="logout.php">Log out</a></li>
+<li><a href="../logout.php">Log out</a></li>
 </ul>
 
 <div class="hamburger menu_mm menu-vertical">
@@ -91,18 +91,18 @@ employment@gmail.com</li>
 <nav class="menu_nav">
 <ul class="menu_mm">
 <li><a href="#">Welcome <?php echo $_SESSION['fullname'] ?></a></li>
-<li><a href="logout.php">Log out</a></li>
+<li><a href="../logout.php">Log out</a></li>
 </ul>
 </nav>
 </div>
 
 
 <script data-cfasync="false" src="js/email-decode.min.js"></script><script src="./js/jquery.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./owlcarousel/owl.carousel.min.js"></script>
-<script src="/.js/jquery-ui.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../owlcarousel/owl.carousel.min.js"></script>
+<script src="../.js/jquery-ui.min.js"></script>
 
-<script src="./js/custom.js"></script>
+<script src="../js/custom.js"></script>
 <script>
         $(".search-icone").click(function(){
      // $(".menu").animate({height: "100vh"});
@@ -149,7 +149,7 @@ if (isset($_POST['booking'])) {
       $result = mysqli_query($conn , $query) or die(mysqli_error($conn));
       if (mysqli_affected_rows($conn) > 0) { 
         echo "<script>alert('SUCCESSFULLY Applied for booking please waiting for approval');
-        window.location.href='user/userbookingdisplay.php';</script>";
+        window.location.href='userbookingdisplay.php';</script>";
                                            }
              }
 
@@ -179,7 +179,7 @@ if (isset($_POST['booking'])) {
 	</div>
 	<br><br>
 
- <?php include 'includes/footer.php';?>
+ <?php include '../includes/footer.php';?>
 
 
 

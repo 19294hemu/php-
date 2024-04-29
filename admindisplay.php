@@ -1,165 +1,98 @@
-<?php include 'includes/connection.php';?>
-<!doctype html>
-<html lang="zxx">
+<?php
+session_start();
+//error_reporting(0);
+include('includes/config.php');
+if (strlen($_SESSION['id']==0)) {
+  header('location:logout.php');
+  } else{
+// Code for deletion       
+
+
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-<title>Self Employment Service Booking</title>
-
-
-
-<link rel="stylesheet" href="./css/bootstrap.min.css">
-
-<link href="./font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-<link href="./css/matrialize.css" rel="stylesheet">
-
-<link href="./owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-<link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Persons</title>
+    <!-- Data Table CSS -->
+    <link href="vendors/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendors/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="vendors/jquery-toggles/css/toggles.css" rel="stylesheet" type="text/css">
+    <link href="vendors/jquery-toggles/css/themes/toggles-light.css" rel="stylesheet" type="text/css">
+    <link href="dist/css/style.css" rel="stylesheet" type="text/css">
 </head>
-<?php session_start() ?>
-
-<div class="top_bar background-color-orange">
-<div class="top_bar_container">
-<div class="container">
-<div class="row">
-<div class="col">
-<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-<ul class="top_bar_contact_list">
-<li>
-<i class="fa fa-phone coll" aria-hidden="true"></i>
-<div class="contact-no">0123 4567 8912</div>
-</li>
-<li style="color: white">
-<i class="fa fa-envelope coll" aria-hidden="true"></i>
-employment@gmail.com</li>
-</ul>
-<div class=" ml-auto ">
-    <a href="feedback.php" style="color: white"><i class="fa fa-comment" ></i>Feedback</a>
-<div class="search_button search"><i class="large material-icons search-icone">search</i></div>
-<div class="hamburger menu_mm  search_button transparent search display"><i class="large material-icons font-color-white  search-icone  menu_mm ">menu</i></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="header_container background-color-orange-light">
-<div class="container">
-<div class="row">
-<div class="col">
-<div class="header_content d-flex flex-row align-items-center justify-content-start">
-<div class="logo_container">
-<a href="index.php">
-<img src="./imags/logo.png" class="logo-text" alt="" height="50px">
-</a>
-</div>
-<nav class="main_nav_contaner ml-auto">
-<ul class="main_nav">
-
-<li><a href="#">Welcome <b><?php echo $_SESSION['fullname'] ?></b></a></li>
-<li><a href="adminbookingdisplay.php">Booking View</a></li>
-<li><a href="logout.php">Admin Log Out</a></li>
-</ul>
-
-<div class="hamburger menu_mm menu-vertical">
-<i class="large material-icons font-color-white menu_mm menu-vertical">menu</i>
-</div>
-</nav>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
-<div class="menu_close_container">
-<div class="menu_close">
-<div></div>
-<div></div>
-</div>
-</div>
-<div class="search">
-<form action="#" class="header_search_form menu_mm">
-<input type="search" class="search_input menu_mm" placeholder="Search" required="required">
-<button class="header_search_button d-flex flex-column align-items-center justify-content-center menu_mm">
-<i class="fa fa-search menu_mm" aria-hidden="true"></i>
-</button>
-</form>
-</div>
-<nav class="menu_nav">
-<ul class="menu_mm">
-
-<li style="color: white">Welcome <b><?php echo $_SESSION['fullname'] ?></b></li>
-<li><a href="adminbookingdisplay.php">Booking View</a></li>
-<li><a href="logout.php">Admin Log OUT</a></li>
-</ul>
-</nav>
-</div>
-
-
-<script data-cfasync="false" src="js/email-decode.min.js"></script><script src="./js/jquery.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./owlcarousel/owl.carousel.min.js"></script>
-<script src="/.js/jquery-ui.min.js"></script>
-
-<script src="./js/custom.js"></script>
-<script>
-        $(".search-icone").click(function(){
-     // $(".menu").animate({height: "100vh"});
-});
-
-    </script>
 <body>
+    
+   
+	<!-- HK Wrapper -->
+	<div class="hk-wrapper hk-vertical-nav">
+<!-- Top Navbar -->
+<?php include_once('includes/navbar.php');
+include_once('includes/sidebar.php');
+?>
+        <div id="hk_nav_backdrop" class="hk-nav-backdrop"></div>
+        <!-- /Vertical Nav -->
 
+        <!-- Main Content -->
+        <div class="hk-pg-wrapper">
+            <!-- Breadcrumb -->
+            <nav class="hk-breadcrumb" aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-light bg-transparent">
+<li class="breadcrumb-item"><a href="#">Users</a></li>
+<li class="breadcrumb-item active" aria-current="page">Users</li>
+                </ol>
+            </nav>
+            <!-- /Breadcrumb -->
 
-<h3 class="page-header">
-                            <center> <marquee width = 70% ><font color="green" > Self Employment Service booking...</font></marquee></center>
-                        </h3>
-<div class="row">
-<div class="col-lg-12">
-        <div class="table-responsive">
+            <!-- Container -->
+            <div class="container">
 
-<form action="" method="post">
-            <table class="table table-bordered table-striped table-hover">
+                <!-- Title -->
+<div class="hk-pg-header">
+ <h4 class="hk-pg-title"><span class="pg-title-icon"><span class="feather-icon"><i data-feather="database"></i></span></span>                            <center>Approved Users list given below . </center>
+</h4>
+                </div>
+                <!-- /Title -->
 
-
-            <thead>
-                    <tr>
-                        <th>ID</th>
+                <!-- Row -->
+                <div class="row">
+                    <div class="col-xl-12">
+                        <section class="hk-sec-wrapper">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <div class="table-wrap">
+                                        <table id="datable_1" class="table table-hover w-100 display pb-30">
+                                            <thead>
+                                                <tr>
+                                                  <th>ID</th>
                         <th>Full Name</th>
-                        <th>Father Name </th>
+                       <!-- <th>Father Name </th>
                         <th>Date of Birth</th>
-                        <th>Registred on </th>
+                        <th>Registred on </th> -->
                         <th>Role</th>
-                        <th>Email</th>
+                                                <!--  <th>Email</th>-->
                         <th>Phone No</th>
-                        <th>User Name</th>
+                       <!--  <th>User Name</th>
                         <th>Password</th>
-                        <th>Gender</th>
+                        <th>Gender</th> -->
                         <th>Education</th>
-                        <th>Skills</th>
+                                               <!--   <th>Skills</th>
                         <th>Experience</th>
-                        <th>Projects Done</th>
+                         <!-- <th>Projects Done</th> -->
                         <th>Address</th>
                         <th>Requirment</th>
                         <th>Status</th>
                         <th>Delete</th>
                         
-                    </tr>
-                </thead>
-                <tbody>
-
-
-
-
-
-                 <?php
+                         
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+       <?php
 
 $query = "SELECT * FROM users ORDER BY registredon DESC";
-$run_query = mysqli_query($conn, $query) or die(mysqli_error($conn));
+$run_query = mysqli_query($con, $query) or die(mysqli_error($conn));
 if (mysqli_num_rows($run_query) > 0) {
 while ($row = mysqli_fetch_array($run_query)) {
     $id = $row['id'];
@@ -184,22 +117,22 @@ while ($row = mysqli_fetch_array($run_query)) {
     echo "<tr>";
     echo "<td>$id</td>";
     echo "<td> $fullname</td>";
-    echo "<td>$fathername</td>";
-    echo "<td>$dateofbirth</td>";
-    echo "<td>$registredon</td>";
+  //  echo "<td>$fathername</td>";
+  //  echo "<td>$dateofbirth</td>";
+   // echo "<td>$registredon</td>";
     echo "<td>$role</td>";
   
-    echo "<td>$email</td>";
+  //  echo "<td>$email</td>";
     echo "<td>$phoneno</td>";
-    echo "<td>$username</td>";
+   // echo "<td>$username</td>";
    
-    echo "<td>$password</td>";
+   // echo "<td>$password</td>";
   
-    echo "<td>$gender</td>";
+   // echo "<td>$gender</td>";
     echo "<td>$education</td>";
-    echo "<td>$skills</td>";
-    echo "<td>$experience</td>";
-    echo "<td>$projects</td>";
+   // echo "<td>$skills</td>";
+   // echo "<td>$experience</td>";
+  //  echo "<td>$projects</td>";
     echo "<td>$address</td>";
     echo "<td>$requirment</td>";
    
@@ -222,23 +155,30 @@ if( $role!=='Admin'){
 ?>
 
 
-                </tbody>
-            </table>
-           
-</form>
-</div>
-</div>
-</div>
- <?php
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+                <!-- /Row -->
+
+            </div>
+            <!-- /Container -->
+<?php
  
     if (isset($_GET['del'])) {
-        $note_del = mysqli_real_escape_string($conn, $_GET['del']);
+        $note_del = mysqli_real_escape_string($con, $_GET['del']);
         $file_uploader = $_SESSION['username'];
         $del_query = "DELETE FROM users WHERE id='$note_del'";
-        $run_del_query = mysqli_query($conn, $del_query) or die (mysqli_error($conn));
-        if (mysqli_affected_rows($conn) > 0) {
+        $run_del_query = mysqli_query($con, $del_query) or die (mysqli_error($conn));
+        if (mysqli_affected_rows($con) > 0) {
             echo "<script>alert('Record deleted successfully');
-            window.location.href='index.php';</script>";
+            window.location.href='admindisplay.php';</script>";
         }
         else {
          echo "<script>alert('error occured.try again!');</script>";   
@@ -246,10 +186,11 @@ if( $role!=='Admin'){
         }
 
          if (isset($_GET['approve'])) {
-        $note_approve = mysqli_real_escape_string($conn,$_GET['approve']);
+        $note_approve = mysqli_real_escape_string($con,$_GET['approve']);
         $approve_query = "UPDATE users SET status='approved' WHERE id='$note_approve'";
-        $run_approve_query = mysqli_query($conn, $approve_query) or die (mysqli_error($conn));
-        if (mysqli_affected_rows($conn) > 0) {
+		$run_approve_query = mysqli_query($con, $approve_query) or die (mysqli_error($con));
+        
+        if (mysqli_affected_rows($con) > 0) {
             echo "<script>alert('Record approved successfully');
             window.location.href='admindisplay.php';</script>";
         }
@@ -262,41 +203,36 @@ if( $role!=='Admin'){
 
 
 
+            <!-- Footer -->
+<?php include_once('includes/footer.php');?>
+            <!-- /Footer -->
+        </div>
+        <!-- /Main Content -->
+    </div>
+    <!-- /HK Wrapper -->
 
+    <script src="vendors/jquery/dist/jquery.min.js"></script>
+    <script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="dist/js/jquery.slimscroll.js"></script>
+    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="vendors/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+<script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="vendors/jszip/dist/jszip.min.js"></script>
+    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="dist/js/dataTables-data.js"></script>
+    <script src="dist/js/feather.min.js"></script>
+    <script src="dist/js/dropdown-bootstrap-extended.js"></script>
+    <script src="vendors/jquery-toggles/toggles.min.js"></script>
+    <script src="dist/js/toggle-data.js"></script>
+    <script src="dist/js/init.js"></script>
 </body>
 </html>
-
-<?php include 'includes/footer.php';?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<?php } ?>
