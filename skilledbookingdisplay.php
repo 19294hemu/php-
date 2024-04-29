@@ -1,4 +1,5 @@
 <?php include 'includes/connection.php';?>
+
 <!doctype html>
 <html lang="zxx">
 <head>
@@ -17,7 +18,8 @@
 
 <link rel="stylesheet" href="./css/style.css">
 </head>
-<?php session_start() ?>
+
+<?php session_start(); ?>
 
 <div class="top_bar background-color-orange">
 <div class="top_bar_container">
@@ -35,7 +37,7 @@
 employment@gmail.com</li>
 </ul>
 <div class=" ml-auto ">
-    <a href="feedback.php" style="color: white"><i class="fa fa-comment" ></i>Feedback</a>
+   
 <div class="search_button search"><i class="large material-icons search-icone">search</i></div>
 <div class="hamburger menu_mm  search_button transparent search display"><i class="large material-icons font-color-white  search-icone  menu_mm ">menu</i></div>
 </div>
@@ -60,8 +62,9 @@ employment@gmail.com</li>
 <ul class="main_nav">
 
 <li><a href="#">Welcome <b><?php echo $_SESSION['fullname'] ?></b></a></li>
-<li><a href="adminbookingdisplay.php">Booking View</a></li>
-<li><a href="logout.php">Admin Log Out</a></li>
+<li><a href="skilledbookingdisplay.php">Booking View</a></li>
+<li><a href="skilleddisplay.php">All Users View</a></li>
+<li><a href="logout.php">Log Out</a></li>
 </ul>
 
 <div class="hamburger menu_mm menu-vertical">
@@ -93,8 +96,9 @@ employment@gmail.com</li>
 <ul class="menu_mm">
 
 <li style="color: white">Welcome <b><?php echo $_SESSION['fullname'] ?></b></li>
-<li><a href="adminbookingdisplay.php">Booking View</a></li>
-<li><a href="logout.php">Admin Log OUT</a></li>
+<li><a href="skilledbookingdisplay.php">Booking View</a></li>
+<li><a href="skilleddisplay.php">All Users View</a></li>
+<li><a href="logout.php">Log OUT</a></li>
 </ul>
 </nav>
 </div>
@@ -129,25 +133,16 @@ employment@gmail.com</li>
             <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Father Name </th>
-                        <th>Date of Birth</th>
-                        <th>Registred on </th>
-                        <th>Role</th>
-                        <th>Email</th>
-                        <th>Phone No</th>
-                        <th>User Name</th>
-                        <th>Password</th>
-                        <th>Gender</th>
-                        <th>Education</th>
-                        <th>Skills</th>
-                        <th>Experience</th>
-                        <th>Projects Done</th>
-                        <th>Address</th>
+                        <th>Booking On</th>
+                        <th>Required Person Name</th>
+                        <th>Start   Date </th>
+                        <th>End Date</th>
+                        <th>Applicant Name</th>
                         <th>Requirment</th>
+            
                         <th>Status</th>
-                        <th>Delete</th>
-                        
+                        <th>Work Status</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -157,66 +152,53 @@ employment@gmail.com</li>
 
 
                  <?php
+                     //$name=$_SESSION['fullname']; 
 
-$query = "SELECT * FROM users ORDER BY registredon DESC";
+$query = "SELECT * FROM booking ORDER BY bookingon DESC";
 $run_query = mysqli_query($conn, $query) or die(mysqli_error($conn));
 if (mysqli_num_rows($run_query) > 0) {
 while ($row = mysqli_fetch_array($run_query)) {
     $id = $row['id'];
-    $fullname = $row['fullname'];
-    $fathername = $row['fathername'];
-    $dateofbirth = $row['dateofbirth'];
-    $registredon = $row['registredon'];
+    $bokingon=$row['bookingon'];
+    $requiredpersonname = $row['requiredpersonname'];
+    $startdate = $row['startdate'];
+    $enddate = $row['enddate'];
+    $applicantname = $row['applicantname'];
 
-    $role = $row['role'];
-    $email = $row['email'];
-    $phoneno = $row['phoneno'];
-    $username = $row['username'];
-    $password = $row['password'];
-    $gender = $row['gender'];
-    $education = $row['education'];
-    $skills = $row['skills'];
-    $experience = $row['experience'];
-    $projects = $row['projects'];
-    $address = $row['address'];
     $requirment = $row['requirment'];
-    $status = $row['status'];    
+    $status = $row['status'];
+     $workstatus = $row['workstatus'];
+     if($requiredpersonname==$_SESSION['fullname']){
     echo "<tr>";
     echo "<td>$id</td>";
-    echo "<td> $fullname</td>";
-    echo "<td>$fathername</td>";
-    echo "<td>$dateofbirth</td>";
-    echo "<td>$registredon</td>";
-    echo "<td>$role</td>";
+    echo "<td> $bokingon</td>";
+    echo "<td>$requiredpersonname</td>";
+    echo "<td>$startdate</td>";
+    echo "<td>$enddate</td>";
+    echo "<td>$applicantname</td>";
   
-    echo "<td>$email</td>";
-    echo "<td>$phoneno</td>";
-    echo "<td>$username</td>";
-   
-    echo "<td>$password</td>";
-  
-    echo "<td>$gender</td>";
-    echo "<td>$education</td>";
-    echo "<td>$skills</td>";
-    echo "<td>$experience</td>";
-    echo "<td>$projects</td>";
-    echo "<td>$address</td>";
     echo "<td>$requirment</td>";
    
-   if($status!=='approved' && $role!=='Admin'){
+   
+   if($status!=='approved' && $status!=='Rejected'){
     
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to approve this note?')\"href='?approve=$id'><input type='button' class='btn btn-success' value='Approve'></a></td>";
+    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to approve this note?')\"href='?approve=$id'><input type='button' class='btn btn-success' value='Approve'></a>
+
+<a onClick=\"javascript: return confirm('Are you sure you want to reject this note?')\"href='?reject=$id'><input type='button' class='btn btn-danger' value='Reject'></a>
+    </td>";
                           }
                           else{
                           	echo "<td>$status</td>";
                           }
-if( $role!=='Admin'){
+if( $workstatus!=='Work_Completed' && $status!=='Rejected'){
     
-    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='?del=$id'></i><input type='button' class='btn btn-danger' value='Delete'></td>";
+    echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?')\" href='?del=$id'></i><input type='button' class='btn btn-warning' value='Work Complete'></td>";
+}else{
+    echo "<td>$workstatus</td>";
 }
 
     echo "</tr>";
-
+}
 }
 }
 ?>
@@ -232,13 +214,13 @@ if( $role!=='Admin'){
  <?php
  
     if (isset($_GET['del'])) {
-        $note_del = mysqli_real_escape_string($conn, $_GET['del']);
-        $file_uploader = $_SESSION['username'];
-        $del_query = "DELETE FROM users WHERE id='$note_del'";
+        $booking_del = mysqli_real_escape_string($conn, $_GET['del']);
+        
+        $del_query = "UPDATE booking SET workstatus='Work_Completed' WHERE id='$booking_del'";
         $run_del_query = mysqli_query($conn, $del_query) or die (mysqli_error($conn));
         if (mysqli_affected_rows($conn) > 0) {
-            echo "<script>alert('Record deleted successfully');
-            window.location.href='index.php';</script>";
+            echo "<script>alert('Work completed successfully');
+            window.location.href='skilledbookingdisplay.php';</script>";
         }
         else {
          echo "<script>alert('error occured.try again!');</script>";   
@@ -246,12 +228,24 @@ if( $role!=='Admin'){
         }
 
          if (isset($_GET['approve'])) {
-        $note_approve = mysqli_real_escape_string($conn,$_GET['approve']);
-        $approve_query = "UPDATE users SET status='approved' WHERE id='$note_approve'";
+        $booking_approve = mysqli_real_escape_string($conn,$_GET['approve']);
+        $approve_query = "UPDATE booking SET status='approved' , workstatus='Work_in_progress' WHERE id='$booking_approve'";
         $run_approve_query = mysqli_query($conn, $approve_query) or die (mysqli_error($conn));
         if (mysqli_affected_rows($conn) > 0) {
             echo "<script>alert('Record approved successfully');
-            window.location.href='admindisplay.php';</script>";
+            window.location.href='skilledbookingdisplay.php';</script>";
+        }
+        else {
+         echo "<script>alert('error occured.try again!');</script>";   
+        }
+        }
+        if (isset($_GET['reject'])) {
+        $reject_approve = mysqli_real_escape_string($conn,$_GET['reject']);
+        $approve_query = "UPDATE booking SET status='Rejected', workstatus='Rejected' WHERE id='$reject_approve'";
+        $run_approve_query = mysqli_query($conn, $approve_query) or die (mysqli_error($conn));
+        if (mysqli_affected_rows($conn) > 0) {
+            echo "<script>alert('Record rejected successfully');
+            window.location.href='skilledbookingdisplay.php';</script>";
         }
         else {
          echo "<script>alert('error occured.try again!');</script>";   
